@@ -1,0 +1,35 @@
+cubes:
+  - name: dimdate
+    sql_table: cube_poc.cube_poc_schema.dimdate
+
+    joins:
+      - name: factinternetsales
+        sql: "{CUBE}.datekey = {factinternetsales}.orderdatekey"
+        relationship: one_to_many
+
+    dimensions:
+      - name: datekey
+        sql: datekey
+        type: number
+        primary_key: true
+
+      - name: englishdaynameofweek
+        sql: englishdaynameofweek
+        type: string
+
+      - name: englishmonthname
+        sql: englishmonthname
+        type: string
+
+      - name: ulldatealternatekey
+        sql: ulldatealternatekey
+        type: time
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+

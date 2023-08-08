@@ -1,0 +1,56 @@
+cubes:
+  - name: dimcustomer
+    sql_table: cube_poc.cube_poc_schema.dimcustomer
+
+    joins:
+      - name: factinternetsales
+        sql: "{CUBE}.customerkey = {factinternetsales}.customerkey"
+        relationship: one_to_many
+    
+
+    dimensions:
+      - name: customerkey
+        sql: customerkey
+        type: number
+        primary_key: true
+
+      - name: geographykey
+        sql: geographykey
+        type: number
+
+      - name: firstname
+        sql: firstname
+        type: string
+
+      - name: lastname
+        sql: lastname
+        type: string
+
+      - name: gender
+        sql: gender
+        type: string
+
+      - name: occupation
+        sql: occupation
+        type: string
+
+      - name: fullname
+        sql: fullname
+        type: string
+
+      - name: datefirstpurchase
+        sql: datefirstpurchase
+        type: time
+
+      - name: defualt_test
+        sql: default
+        type: string
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+

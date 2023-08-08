@@ -1,0 +1,52 @@
+cubes:
+  - name: dimorder
+    sql_table: cube_poc.cube_poc_schema.dimorder
+
+    joins: 
+      - name: factinternetsales
+        sql: "{CUBE}.unique_key = {factinternetsales}.unique_key"
+        relationship: one_to_many
+
+
+    dimensions:
+      - name: salesorderlinenumber
+        sql: salesorderlinenumber
+        type: number
+        primary_key: true
+
+      - name: currencykey
+        sql: currencykey
+        type: number
+
+      - name: salesordernumber
+        sql: salesordernumber
+        type: string
+
+      - name: ordername
+        sql: ordername
+        type: string
+
+      - name: linename
+        sql: linename
+        type: string
+
+      - name: type
+        sql: type
+        type: string
+
+      - name: currency_name
+        sql: currency_name
+        type: string
+
+      - name: ordernumberlinekey
+        sql: ordernumberlinekey
+        type: string
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+

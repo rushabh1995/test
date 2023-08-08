@@ -1,0 +1,28 @@
+cubes:
+  - name: dimproductsubcategory
+    sql_table: cube_poc.cube_poc_schema.dimproductsubcategory
+
+    joins: []
+
+    dimensions:
+      - name: productsubcategorykey
+        sql: productsubcategorykey
+        type: number
+        primary_key: true
+
+      - name: productcategorykey
+        sql: productcategorykey
+        type: number
+
+      - name: productsubcategoryname
+        sql: productsubcategoryname
+        type: string
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+

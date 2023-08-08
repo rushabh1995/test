@@ -1,0 +1,39 @@
+cubes:
+  - name: dimgeography
+    sql_table: cube_poc.cube_poc_schema.dimgeography
+
+    joins:
+      - name: dimcustomer
+        sql: "{CUBE}.geographykey = {dimcustomer}.geographykey"
+        relationship: one_to_many
+
+    dimensions:
+      - name: geographykey
+        sql: geographykey
+        type: number
+        primary_key: true
+
+      - name: city
+        sql: city
+        type: string
+
+      - name: stateprovincename
+        sql: stateprovincename
+        type: string
+
+      - name: englishcountryregionname
+        sql: englishcountryregionname
+        type: string
+
+      - name: postalcode
+        sql: postalcode
+        type: number
+
+    measures:
+      - name: count
+        type: count
+
+    pre_aggregations:
+      # Pre-aggregation definitions go here.
+      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
+
