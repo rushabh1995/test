@@ -1,0 +1,14 @@
+cubes:
+  - name: sftest
+    sql_table: test
+
+    data_source: datasource1
+
+    joins: []
+
+    dimensions:
+
+
+    measures:
+
+

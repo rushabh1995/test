@@ -13,9 +13,10 @@ cubes:
         type: number
         primary_key: true
 
-      - name: productcategoryname
+      - name: product_category
         sql: productcategoryname
         type: string
+        title: product_category
 
     measures:
       - name: count

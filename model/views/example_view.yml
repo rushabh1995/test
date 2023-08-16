@@ -11,19 +11,22 @@
 # In this case, the customers' city dimension is prefixed with the cube name,
 # resulting in "customers_city" when querying the view.
 
-# views:
-#   - name: example_view
-#
-#     cubes:
-#       - join_path: orders
-#         includes:
-#           - status
-#           - created_date
-#
-#           - total_amount
-#           - count
-#
-#       - join_path: orders.customers
-#         prefix: true
-#         includes:
-#           - city
+views:
+  - name: example_view
+
+    cubes:
+      - join_path: factinternetsales
+        includes:
+          - salesamount
+
+      - join_path: factinternetsales.dimproduct.dimproductsubcategory
+        prefix: false
+        includes:
+          - product_category_subcategory
+
+      - join_path: factinternetsales.dimproduct.dimproductsubcategory.dimproductcategory
+        prefix: false
+        includes:
+          - product_category
+
+

@@ -82,7 +82,7 @@ cubes:
       # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
       - name: main
         measures:
-          - factinternetsales.count
+          - {CUBE.count}
         dimensions:
           - dimproduct.productsubcategoryname
 

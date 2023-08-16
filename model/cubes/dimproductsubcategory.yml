@@ -14,9 +14,10 @@ cubes:
         sql: productcategorykey
         type: number
 
-      - name: productsubcategoryname
+      - name: product_category_subcategory
         sql: productsubcategoryname
         type: string
+        title: product_category_subcategory
 
     measures:
       - name: count
