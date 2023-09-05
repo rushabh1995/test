@@ -17,6 +17,10 @@ cubes:
         type: number
         primary_key: true
 
+      - name: productsubcategorykey
+        sql: productsubcategorykey
+        type: number
+
       - name: englishproductname
         sql: englishproductname
         type: string

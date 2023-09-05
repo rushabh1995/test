@@ -2,7 +2,10 @@ cubes:
   - name: dimproductsubcategory
     sql_table: cube_poc.cube_poc_schema.dimproductsubcategory
 
-    joins: []
+    joins:
+      - name: dimproduct
+        sql: "{CUBE}.productsubcategorykey = {dimproduct}.productsubcategorykey"
+        relationship: one_to_many
 
     dimensions:
       - name: productsubcategorykey

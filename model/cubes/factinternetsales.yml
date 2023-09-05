@@ -86,3 +86,14 @@ cubes:
         dimensions:
           - dimproduct.productsubcategoryname
 
+
+      - name: main2  
+        measures:
+          - factinternetsales.sales_average
+        dimensions: 
+          - dimcustomer.firstname
+          - dimcustomer.lastname
+        
+      
+
+
