@@ -18,7 +18,7 @@ cubes:
         sql: geographykey
         type: number
 
-      - name: firstname
+      - name: firstname_f
         sql: firstname
         type: string
 
