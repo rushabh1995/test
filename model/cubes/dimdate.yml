@@ -1,6 +1,6 @@
 cubes:
   - name: dimdate
-    sql_table: cube_poc.cube_poc_schema.dimdate
+    sql_table: AS_AGGREGATE_CATALOG.AS_AGGREGATE_SCHEMA.dimdate
 
     joins:
       - name: factinternetsales
@@ -43,9 +43,6 @@ cubes:
  
     pre_aggregations:
       - name: users_rollup_by_week
-        measures:
-          - CUBE.count
-        dimensions:
-          - CUBE.englishdaynameofweek
         time_dimension: CUBE.ulldatealternatekey
         granularity: week
+        

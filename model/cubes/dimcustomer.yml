@@ -1,14 +1,10 @@
 cubes:
   - name: dimcustomer
-    sql: Select *, case when customerkey > 15000 then 'Avaialble' else 'NA' end as flag from cube_poc.cube_poc_schema.dimcustomer
+    sql_table: AS_AGGREGATE_CATALOG.AS_AGGREGATE_SCHEMA.dimcustomers
 
     joins:
       - name: factinternetsales
         sql: "{CUBE}.customerkey = {factinternetsales}.customerkey"
-        relationship: one_to_many 
-
-      - name: factinternetsalesorig
-        sql: "{CUBE}.customerkey = {factinternetsalesorig}.customerkey"
         relationship: one_to_many
     
 
@@ -22,13 +18,6 @@ cubes:
         sql: geographykey
         type: number
 
-      - name: firstname
-        sql: firstname
-        type: string
-
-      - name: lastname
-        sql: lastname
-        type: string
 
       - name: gender
         sql: gender
@@ -37,29 +26,26 @@ cubes:
       - name: occupation
         sql: occupation
         type: string
+        
 
-      - name: fullname
-        sql: fullname
+      - name: firstname
+        sql: firstname
         type: string
 
-      - name: datefirstpurchase
-        sql: datefirstpurchase
-        type: time
-
-      - name: defualt_test
-        sql: default
+      - name: lastname
+        sql: lastname
+        type: string
+        
+        
+      - name: full_name # data prep 
+        sql: concat(firstname,' ',lastname)
         type: string
 
-      - name: flag 
-        sql: flag 
-        type: string
 
     measures:
-      - name: total_customer_count
-        sql: customerkey
+      - name: count
         type: count
 
     pre_aggregations:
       # Pre-aggregation definitions go here.
       # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
-

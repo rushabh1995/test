@@ -1,7 +1,7 @@
 cubes:
   - name: factinternetsales
     description: " This is the fact tables which tells about internet sales data"
-    sql_table: cube_poc.cube_poc_schema.factinternetsales
+    sql_table: AS_AGGREGATE_CATALOG.AS_AGGREGATE_SCHEMA.factinternetsales
 
     joins: 
       # newly_created
@@ -11,10 +11,6 @@ cubes:
       
       - name: dimdate
         sql: "{CUBE}.orderdatekey = {dimdate}.datekey"
-        relationship: one_to_many
-
-      - name: dimproduct
-        sql: "{CUBE}.productkey = {dimproduct}.productkey"
         relationship: one_to_many
       
       
@@ -38,25 +34,7 @@ cubes:
         sql: customerkey
         type: number
 
-      - name: shipdatekey
-        sql: shipdatekey
-        type: number
-
-      - name: currencykey
-        sql: currencykey
-        type: number
-
-      - name: sales_reasons
-        sql: sales_reasons
-        type: string
-
-      - name: product_info
-        sql: product_info
-        type: string
-
-      - name: orderdate
-        sql: orderdate
-        type: string
+      
 
     measures:
       - name: total_customer_count  # 1.newly_metrics_created
@@ -95,27 +73,3 @@ cubes:
       - name: pct_of_sales_is_tax
         sql: '{CUBE.taxamt} / {CUBE.salesamount}'
         type: number
-
-        
-
-
-    pre_aggregations:
-      # Pre-aggregation definitions go here.
-      # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
-      # - name: main
-      #   measures:
-      #     - {CUBE.count}
-      #   dimensions:
-      #     - dimproduct.productsubcategoryname
-
-
-      - name: main2  
-        measures:
-          - factinternetsales.sales_average
-        dimensions: 
-          - dimcustomer.firstname
-          - dimcustomer.lastname
-        
-      
-
-
