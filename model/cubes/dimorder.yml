@@ -4,7 +4,7 @@ cubes:
 
     joins: 
       - name: factinternetsales
-        sql: "{CUBE}.unique_key = {factinternetsales}.unique_key"
+        sql: "{CUBE}.salesordernumber = {factinternetsales}.salesordernumber"
         relationship: one_to_many
 
 

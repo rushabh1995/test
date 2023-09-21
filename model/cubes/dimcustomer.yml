@@ -1,10 +1,14 @@
 cubes:
   - name: dimcustomer
-    sql_table: cube_poc.cube_poc_schema.dimcustomer
+    sql: Select *, case when customerkey > 15000 then 'Avaialble' else 'NA' end as flag from cube_poc.cube_poc_schema.dimcustomer
 
     joins:
       - name: factinternetsales
         sql: "{CUBE}.customerkey = {factinternetsales}.customerkey"
+        relationship: one_to_many 
+
+      - name: factinternetsalesorig
+        sql: "{CUBE}.customerkey = {factinternetsalesorig}.customerkey"
         relationship: one_to_many
     
 
@@ -46,8 +50,13 @@ cubes:
         sql: default
         type: string
 
+      - name: flag 
+        sql: flag 
+        type: string
+
     measures:
-      - name: count
+      - name: total_customer_count
+        sql: customerkey
         type: count
 
     pre_aggregations:

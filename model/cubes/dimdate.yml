@@ -25,11 +25,27 @@ cubes:
         sql: ulldatealternatekey
         type: time
 
+      - name: calendaryear
+        sql: calendaryear
+        type: string
+
     measures:
       - name: count
         type: count
 
-    pre_aggregations:
+    # pre_aggregations:
       # Pre-aggregation definitions go here.
       # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
 
+  #   cubes:
+  # - name: orders
+  #   sql_table: dimdate
+ 
+    pre_aggregations:
+      - name: users_rollup_by_week
+        measures:
+          - CUBE.count
+        dimensions:
+          - CUBE.englishdaynameofweek
+        time_dimension: CUBE.ulldatealternatekey
+        granularity: week

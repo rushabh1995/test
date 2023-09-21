@@ -1,0 +1,44 @@
+cubes:
+  - name: factinternetsalesorig
+    sql_table: cube_poc.cube_poc_schema.factinternetsalesorig
+
+    joins:
+      - name: dimcustomer
+        sql: "{CUBE}.customerkey = {dimcustomer}.customerkey"
+        relationship: one_to_many
+
+
+    dimensions:
+      - name: salesordernumber
+        sql: salesordernumber
+        type: number
+        primary_key: true
+
+      - name: productkey
+        sql: productkey
+        type: number
+
+      - name: orderdatekey
+        sql: orderdatekey
+        type: number
+
+      - name: customerkey
+        sql: customerkey
+        type: number
+
+      - name: shipdatekey
+        sql: shipdatekey
+        type: number
+
+      - name: currencykey
+        sql: currencykey
+        type: number
+
+      - name: orderdate
+        sql: orderdate
+        type: string
+
+    measures:
+      - name: total_customer_count  # 1.newly_metrics_created
+        sql: count({CUBE}.customerkey)
+        type: number

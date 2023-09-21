@@ -1,8 +1,24 @@
 cubes:
   - name: factinternetsales
+    description: " This is the fact tables which tells about internet sales data"
     sql_table: cube_poc.cube_poc_schema.factinternetsales
 
-    joins: []
+    joins: 
+      # newly_created
+      - name: dimcustomer
+        sql: "{CUBE}.customerkey = {dimcustomer}.customerkey"
+        relationship: one_to_many
+      
+      - name: dimdate
+        sql: "{CUBE}.orderdatekey = {dimdate}.datekey"
+        relationship: one_to_many
+
+      - name: dimproduct
+        sql: "{CUBE}.productkey = {dimproduct}.productkey"
+        relationship: one_to_many
+      
+      
+    
 
     dimensions:
       - name: salesordernumber
@@ -43,8 +59,9 @@ cubes:
         type: string
 
     measures:
-      - name: count
-        type: count
+      - name: total_customer_count  # 1.newly_metrics_created
+        sql: count({CUBE}.customerkey)
+        type: number
 
       - name: salesorderlinenumber
         sql: salesorderlinenumber
@@ -53,14 +70,22 @@ cubes:
       - name: orderquantity
         sql: orderquantity
         type: sum
+        
+      - name: Avg_orderquantity  # 2.newly_metrics_created
+        sql: orderquantity
+        type: avg
 
       - name: unitprice
         sql: unitprice
         type: sum
 
-      - name: salesamount
+      - name: salesamount   
         sql: salesamount
         type: sum
+
+      - name: total_salesamount   # 3.newly_metrics_created
+        sql: sum(salesamount)
+        type: number
 
       - name: taxamt
         sql: taxamt
@@ -80,11 +105,11 @@ cubes:
     pre_aggregations:
       # Pre-aggregation definitions go here.
       # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
-      - name: main
-        measures:
-          - {CUBE.count}
-        dimensions:
-          - dimproduct.productsubcategoryname
+      # - name: main
+      #   measures:
+      #     - {CUBE.count}
+      #   dimensions:
+      #     - dimproduct.productsubcategoryname
 
 
       - name: main2  

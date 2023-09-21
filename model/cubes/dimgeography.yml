@@ -34,6 +34,12 @@ cubes:
         type: count
 
     pre_aggregations:
+      - name: dimgeography_rollup
+        dimensions:
+          - CUBE.geographykey
+          - CUBE.stateprovincename
+          - CUBE.city
+      # Pre-aggregation d
       # Pre-aggregation definitions go here.
       # Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
 

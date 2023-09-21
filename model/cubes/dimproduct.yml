@@ -3,9 +3,9 @@ cubes:
     sql_table: cube_poc.cube_poc_schema.dimproduct
 
     joins:
-      - name: dimproductsubcategory
-        sql: "{CUBE}.productkey = {dimproductsubcategory}.productcategorykey"
-        relationship: one_to_many
+      # - name: dimproductsubcategory
+      #   sql: "{CUBE}.productkey = {dimproductsubcategory}.productcategorykey"
+      #   relationship: one_to_many
 
       - name: factinternetsales
         sql: "{CUBE}.productkey = {factinternetsales}.productkey"

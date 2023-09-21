@@ -1,0 +1,68 @@
+cubes:
+  - name: dimcustomers1
+    data_source: datasource1
+    sql_table: aw_internetsales_schema..dimcustomers
+ 
+    pre_aggregations:
+      - name: dimcustomers_rollup
+        type: rollup
+        measures:
+          - CUBE.Total_customer_count
+        dimensions:
+          - CUBE.geographykey
+          - CUBE.OCCUPATION
+        
+ 
+      - name: dimgeography_with_dimcustomers_rollup
+        type: rollup_join
+        measures:
+          - CUBE.Total_customer_count
+          
+              
+        dimensions:
+          - dimgeography.stateprovincename
+          - dimgeography.city
+          - CUBE.gender
+        rollups:
+          - dimgeography.dimgeography_rollup
+          - CUBE.dimcustomers_rollup
+ 
+    joins:
+      - name: dimgeography
+        relationship: one_to_one
+        sql: "{CUBE.geographykey} = {dimgeography.geographykey}"
+ 
+    measures:
+      - name: Total_customer_count
+        sql: customerkey
+        type: count
+ 
+    dimensions:
+      - name: geographykey
+        sql: CUBE.geographykey
+        type: number
+        
+        
+      - name: customerkey
+        sql: CUBE.customerkey
+        type: number
+        primary_key: true
+ 
+ 
+      - name: stateprovincename
+        sql: dimgeography.stateprovincename
+        type: string
+        
+      - name: city
+        sql: dimgeography.city
+        type: string 
+        
+      - name : OCCUPATION
+        sql : CUBE.OCCUPATION
+        type : string
+        
+      - name : gender
+        sql : CUBE.gender
+        type: string
+ 
+      

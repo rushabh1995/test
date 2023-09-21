@@ -1,0 +1,82 @@
+cubes:
+  - name: factinternetsales
+    sql_table: cube_poc.cube_poc_schema.factinternetsales
+
+    joins: 
+      # newly_created
+      - name: dimcustomer
+        sql: "{CUBE}.customerkey = {dimcustomer}.customerkey"
+        relationship: one_to_many
+      
+      - name: dimdate
+        sql: "{CUBE}.orderdatekey = {dimdate}.datekey"
+        relationship: one_to_many
+
+      - name: dimproduct
+        sql: "{CUBE}.productkey = {dimproduct}.productkey"
+        relationship: one_to_many
+      
+      
+    
+
+    dimensions:
+      - name: salesordernumber
+        sql: salesordernumber
+        type: number
+        primary_key: true
+
+      - name: productkey
+        sql: productkey
+        type: number
+
+      - name: orderdatekey
+        sql: orderdatekey
+        type: number
+
+      - name: customerkey
+        sql: customerkey
+        type: number
+
+      - name: shipdatekey
+        sql: shipdatekey
+        type: number
+
+      - name: currencykey
+        sql: currencykey
+        type: number
+
+      - name: sales_reasons
+        sql: sales_reasons
+        type: string
+
+      - name: product_info
+        sql: product_info
+        type: string
+
+      - name: orderdate
+        sql: orderdate
+        type: string
+
+    measures:
+      - name: total_salesamount   # 3.newly_metrics_created
+        sql: sum(salesamount)
+        type: number
+
+      
+
+        
+
+
+    pre_aggregations:
+      - name: users_rollup
+        measures:
+          - CUBE.total_salesamount
+        dimensions:
+          - CUBE.sales_reasons
+        time_dimension: CUBE.orderdate
+        granularity: "day"
+        
+        
+      
+
+
