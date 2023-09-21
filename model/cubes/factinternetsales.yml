@@ -69,19 +69,16 @@ cubes:
 
       - name: orderquantity
         sql: orderquantity
-        type: sum
+        type: number
         
       - name: Avg_orderquantity  # 2.newly_metrics_created
         sql: orderquantity
         type: avg
 
-      - name: unitprice
-        sql: unitprice
-        type: sum
 
       - name: salesamount   
         sql: salesamount
-        type: sum
+        type: number
 
       - name: total_salesamount   # 3.newly_metrics_created
         sql: sum(salesamount)
@@ -89,7 +86,7 @@ cubes:
 
       - name: taxamt
         sql: taxamt
-        type: sum
+        type: number
 
       - name: sales_average
         sql:  '{CUBE.salesamount}/{CUBE.orderquantity}'   
